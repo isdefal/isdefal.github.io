@@ -243,6 +243,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Flask/" itemprop="url" rel="index">
+                    <span itemprop="name">Flask</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -265,8 +284,11 @@
 
       
         
-          <h2 id="大型程序的结构"><a href="#大型程序的结构" class="headerlink" title="大型程序的结构"></a>大型程序的结构</h2><h3 id="1-配置选项"><a href="#1-配置选项" class="headerlink" title="1. 配置选项"></a>1. 配置选项</h3><p>配置选项包含所有的通用、子类配置</p>
-<h3 id="2-工厂函数"><a href="#2-工厂函数" class="headerlink" title="2. 工厂函数"></a>2. 工厂函数</h3><p>工厂函数用于延迟创建程序实例，以便于修改配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">from flask import Flask, render_template</div><div class="line">from flask_bootstrap import Bootstrap</div><div class="line">from flask_mail import Mail</div><div class="line">from flask_moment import Moment</div><div class="line">from flask_sqlalchemy import SQLAlchemy</div><div class="line">from config import config</div><div class="line">from flask_login import LoginManager</div><div class="line"></div><div class="line"></div><div class="line">bootstrap = Bootstrap()</div><div class="line">mail = Mail()</div><div class="line">moment = Moment()</div><div class="line">db = SQLAlchemy()</div><div class="line"></div><div class="line">login_manager = LoginManager()</div><div class="line">login_manager.session_protection = <span class="string">'strong'</span></div><div class="line">login_manager.login_view = <span class="string">'auth.login'</span></div><div class="line"></div><div class="line"></div><div class="line">def create_app(config_name):</div><div class="line">    app = Flask(__name__)</div><div class="line">    app.config.from_object(config[config_name])</div><div class="line">    config[config_name].init_app(app)</div><div class="line"></div><div class="line">    bootstrap.init_app(app)</div><div class="line">    mail.init_app(app)</div><div class="line">    moment.init_app(app)</div><div class="line">    db.init_app(app)</div><div class="line">    login_manager.init_app(app)</div><div class="line"></div><div class="line">    from .main import main as main_blueprint</div><div class="line">    app.register_blueprint(main_blueprint)</div><div class="line"></div><div class="line">    <span class="built_in">return</span> app</div></pre></td></tr></table></figure></p>
+          
+          大型程序的结构1. 配置选项配置选项包含所有的通用、子类配置
+2. 工厂函数工厂函数用于延迟创建程序
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/09/28/Flask学习笔记/#more" rel="contents">
               阅读全文 &raquo;
@@ -358,17 +380,14 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+          Welcome to Hexo! This is your very first post. Che
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/28/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -424,7 +443,7 @@
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/default_avatar.jpg"
+               src="/images/avatar.png"
                alt="DeFal" />
           <p class="site-author-name" itemprop="name">DeFal</p>
           <p class="site-description motion-element" itemprop="description"></p>
@@ -437,6 +456,13 @@
             </a>
           </div>
 
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
           
 
           
