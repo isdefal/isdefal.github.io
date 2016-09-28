@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Flask,python," />
 
 
 
@@ -57,12 +57,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="I'm DeFal">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="大型程序的结构1. 配置选项配置选项包含所有的通用、子类配置
+2. 工厂函数工厂函数用于延迟创建程序实例，以便于修改配置12345678910111213141516171819202122232425262728293031323334from flask import Flask, render_templatefrom flask_bootstrap import Bootstrapfrom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/09/28/Flask学习笔记/index.html">
 <meta property="og:site_name" content="I'm DeFal">
+<meta property="og:description" content="大型程序的结构1. 配置选项配置选项包含所有的通用、子类配置
+2. 工厂函数工厂函数用于延迟创建程序实例，以便于修改配置12345678910111213141516171819202122232425262728293031323334from flask import Flask, render_templatefrom flask_bootstrap import Bootstrapfrom">
+<meta property="og:updated_time" content="2016-09-28T14:57:39.031Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="I'm DeFal">
+<meta name="twitter:title" content="Flask学习笔记">
+<meta name="twitter:description" content="大型程序的结构1. 配置选项配置选项包含所有的通用、子类配置
+2. 工厂函数工厂函数用于延迟创建程序实例，以便于修改配置12345678910111213141516171819202122232425262728293031323334from flask import Flask, render_templatefrom flask_bootstrap import Bootstrapfrom">
 
 
 
@@ -80,7 +87,7 @@
   };
 </script>
 
-  <title> I'm DeFal </title>
+  <title> Flask学习笔记 | I'm DeFal </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -101,9 +108,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -200,9 +205,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -222,10 +227,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/09/28/Flask学习笔记/" itemprop="url">
-                  Flask学习笔记
-                </a>
+                Flask学习笔记
               
             
           </h1>
@@ -264,136 +266,59 @@
       
 
       
-        
-          <h2 id="大型程序的结构"><a href="#大型程序的结构" class="headerlink" title="大型程序的结构"></a>大型程序的结构</h2><h3 id="1-配置选项"><a href="#1-配置选项" class="headerlink" title="1. 配置选项"></a>1. 配置选项</h3><p>配置选项包含所有的通用、子类配置</p>
+        <h2 id="大型程序的结构"><a href="#大型程序的结构" class="headerlink" title="大型程序的结构"></a>大型程序的结构</h2><h3 id="1-配置选项"><a href="#1-配置选项" class="headerlink" title="1. 配置选项"></a>1. 配置选项</h3><p>配置选项包含所有的通用、子类配置</p>
 <h3 id="2-工厂函数"><a href="#2-工厂函数" class="headerlink" title="2. 工厂函数"></a>2. 工厂函数</h3><p>工厂函数用于延迟创建程序实例，以便于修改配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">from flask import Flask, render_template</div><div class="line">from flask_bootstrap import Bootstrap</div><div class="line">from flask_mail import Mail</div><div class="line">from flask_moment import Moment</div><div class="line">from flask_sqlalchemy import SQLAlchemy</div><div class="line">from config import config</div><div class="line">from flask_login import LoginManager</div><div class="line"></div><div class="line"></div><div class="line">bootstrap = Bootstrap()</div><div class="line">mail = Mail()</div><div class="line">moment = Moment()</div><div class="line">db = SQLAlchemy()</div><div class="line"></div><div class="line">login_manager = LoginManager()</div><div class="line">login_manager.session_protection = <span class="string">'strong'</span></div><div class="line">login_manager.login_view = <span class="string">'auth.login'</span></div><div class="line"></div><div class="line"></div><div class="line">def create_app(config_name):</div><div class="line">    app = Flask(__name__)</div><div class="line">    app.config.from_object(config[config_name])</div><div class="line">    config[config_name].init_app(app)</div><div class="line"></div><div class="line">    bootstrap.init_app(app)</div><div class="line">    mail.init_app(app)</div><div class="line">    moment.init_app(app)</div><div class="line">    db.init_app(app)</div><div class="line">    login_manager.init_app(app)</div><div class="line"></div><div class="line">    from .main import main as main_blueprint</div><div class="line">    app.register_blueprint(main_blueprint)</div><div class="line"></div><div class="line">    <span class="built_in">return</span> app</div></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/28/Flask学习笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+<a id="more"></a>
+<h3 id="3-蓝本"><a href="#3-蓝本" class="headerlink" title="3. 蓝本"></a>3. 蓝本</h3><p>蓝本用于控制程序路由,在 app/main/<strong>init</strong>.py 中创建蓝本， 在 app/<strong>init</strong>.py 中注册蓝本<br>创建蓝本:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from flask import Blueprint</div><div class="line"></div><div class="line"></div><div class="line">main = Blueprint(<span class="string">'main'</span>, __name__)</div><div class="line"></div><div class="line">from . import views, errors</div></pre></td></tr></table></figure></p>
+<p>注册蓝本:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">def create_app(config_name):</div><div class="line">    app = Flask(__name__)</div><div class="line">    app.config.from_object(config[config_name])</div><div class="line">    config[config_name].init_app(app)</div><div class="line"></div><div class="line">    bootstrap.init_app(app)</div><div class="line">    mail.init_app(app)</div><div class="line">    moment.init_app(app)</div><div class="line">    db.init_app(app)</div><div class="line">    login_manager.init_app(app)</div><div class="line"></div><div class="line">    from .main import main as main_blueprint</div><div class="line">    app.register_blueprint(main_blueprint)</div><div class="line"></div><div class="line">    <span class="built_in">return</span> app</div></pre></td></tr></table></figure></p>
+
       
     </div>
 
     <div>
       
+        
+      
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/28/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-28T16:56:18+08:00" content="2016-09-28">
-              2016-09-28
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/Flask/" rel="tag">#Flask</a>
           
-            
+            <a href="/tags/python/" rel="tag">#python</a>
           
-
-          
-
-          
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/28/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -401,6 +326,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -420,8 +349,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/default_avatar.jpg"
@@ -466,6 +404,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#大型程序的结构"><span class="nav-number">1.</span> <span class="nav-text">大型程序的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置选项"><span class="nav-number">1.1.</span> <span class="nav-text">1. 配置选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-工厂函数"><span class="nav-number">1.2.</span> <span class="nav-text">2. 工厂函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-蓝本"><span class="nav-number">1.3.</span> <span class="nav-text">3. 蓝本</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -550,6 +499,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
 
   
 
